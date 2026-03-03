@@ -3,6 +3,8 @@ package in.prashanth.student_crud.controller;
 import in.prashanth.student_crud.dto.StudentRequestDTO;
 import in.prashanth.student_crud.dto.StudentResponseDTO;
 import in.prashanth.student_crud.service.StudentService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,7 @@ public class StudentController {
 
 
     @PostMapping
-    public StudentResponseDTO  create(@RequestBody StudentRequestDTO dto){
+    public StudentResponseDTO  create(@Valid @RequestBody StudentRequestDTO dto){
 
         return studentService.create(dto);
     }
@@ -41,7 +43,7 @@ public class StudentController {
     }
 
    @GetMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> getById(@ PathVariable Long id){
+    public ResponseEntity<StudentResponseDTO> getById(@PathVariable Long id){
         try {
             StudentResponseDTO dto = studentService.readById(id);
             return ResponseEntity.status(HttpStatus.OK).body(dto);
@@ -56,7 +58,7 @@ public class StudentController {
    }
 
    @PutMapping("/{id}")
-    public ResponseEntity<StudentResponseDTO> update(@RequestBody StudentRequestDTO dto, @PathVariable Long id){
+    public ResponseEntity<StudentResponseDTO> update(@Valid @RequestBody StudentRequestDTO dto, @PathVariable Long id){
 
         try{
             StudentResponseDTO studentResponseDTO = studentService.update(id,dto);

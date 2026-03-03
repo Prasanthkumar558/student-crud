@@ -3,6 +3,7 @@ package in.prashanth.student_crud.service;
 import in.prashanth.student_crud.dto.StudentRequestDTO;
 import in.prashanth.student_crud.dto.StudentResponseDTO;
 import in.prashanth.student_crud.entity.Student;
+import in.prashanth.student_crud.exceptions.StudentNotFound;
 import in.prashanth.student_crud.mapper.StudentMapper;
 import in.prashanth.student_crud.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class StudentService {
     // READ BY ID
     public StudentResponseDTO readById(Long id){
 
-        Student student = repository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
+        Student student = repository.findById(id).orElseThrow(()-> new StudentNotFound("User not found"));
 
         return mapper.toResponse(student);
 
@@ -50,7 +51,7 @@ public class StudentService {
     //UPDATE
     public StudentResponseDTO update(Long id,StudentRequestDTO studentRequestDTO){
 
-        Student existing = repository.findById(id).orElseThrow(()-> new RuntimeException("Student not found"));
+        Student existing = repository.findById(id).orElseThrow(()-> new StudentNotFound("Student not found"));
 
         mapper.updateStudentFromDto(studentRequestDTO ,existing);
 
@@ -66,7 +67,7 @@ public class StudentService {
             repository.deleteById(id);
         }
         else{
-            throw new RuntimeException("Student not found");
+            throw new StudentNotFound("Student not found");
         }
     }
 }

@@ -1,9 +1,18 @@
 package in.prashanth.student_crud.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class StudentRequestDTO {
 
+    @NotBlank(message = "Name should not be null")
+    @Size(min = 3,max = 255,message = "Check your Character length")
     private String name;
+    @Email(message = "Enter a valid email")
     private String emailId;
+    @NotNull
     private String course;
 
     public StudentRequestDTO(String name, String emailId, String course) {
