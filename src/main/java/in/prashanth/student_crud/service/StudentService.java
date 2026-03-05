@@ -41,7 +41,7 @@ public class StudentService {
     // READ BY ID
     public StudentResponseDTO readById(Long id){
 
-        Student student = repository.findById(id).orElseThrow(()-> new StudentNotFound("User not found"));
+        Student student = repository.findById(id).orElseThrow(()-> new StudentNotFound("Student not found"));
 
         return mapper.toResponse(student);
 

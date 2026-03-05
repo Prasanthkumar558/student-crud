@@ -49,7 +49,7 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.OK).body(dto);
         }
         catch (RuntimeException e){
-            if(e.getMessage().equals("User not found")){
+            if(e.getMessage().equals("Student not found")){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
         }
@@ -77,7 +77,7 @@ public class StudentController {
     public ResponseEntity<String> delete(@PathVariable Long id){
         try{
             studentService.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("User deleted");
+            return ResponseEntity.status(HttpStatus.OK).body("Student deleted");
         }
         catch (RuntimeException e){
             if(e.getMessage().equals("Student not found")){
